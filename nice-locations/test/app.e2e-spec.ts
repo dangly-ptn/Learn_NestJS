@@ -19,7 +19,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .then(({text}) => {
+      .then(({ text }) => {
         expect(text).toMatchCompiledHandlebarsTemplate('list.hbs', {
           locations: [
             'Location 1',
