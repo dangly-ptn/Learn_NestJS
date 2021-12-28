@@ -1,15 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { resolve } from 'path';
 import { AppModule } from './app.module';
+import { ConfigService } from './config/config.service';
 
 async function bootstrap() {
-  const APP_DIRECTORY = resolve(__dirname, '..');
-
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.setViewEngine('hbs');
-  app.setBaseViewsDir(resolve(APP_DIRECTORY, 'views'));
-  app.useStaticAssets(resolve(APP_DIRECTORY, 'public'));
+  const config = app.get(ConfigService);
+  const viewsDirectory = config.get<string>('templates.path');
+  const publicDirectory = config.get<string>('public.path');
+  app.setBaseViewsDir(viewsDirectory);
+  app.useStaticAssets(publicDirectory);
 
   await app.listen(3000);
 }
