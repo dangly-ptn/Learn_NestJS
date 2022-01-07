@@ -4,7 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb+srv://haidang:xIMgMBt17xA8XhpX@cluster0.5acgb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')],
+  imports: [
+    MongooseModule.forRoot('mongodb+srv://haidang:VLsdbPxTvnUWGPdC@cluster0.5acgb.mongodb.net/nestjs-app?retryWrites=true&w=majority')
+    ],
   controllers: [AppController],
   providers: [AppService],
 })
